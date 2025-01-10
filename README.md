@@ -1,4 +1,4 @@
-# miniDevOps: A DevOps Toolkit Operated within Docker
+# DevOpsTools: A DevOps Toolkit Operated within Docker
 
 `miniDevOps` is a Docker image designed to provide a comprehensive set of DevOps tools and utilities, all within a Debian Linux environment.
 
