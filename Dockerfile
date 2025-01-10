@@ -171,10 +171,10 @@ RUN curl -LO "https://mirror.openshift.com/pub/openshift-v4/x86_64/clients/ocp/$
 
 # 4p) argocd cli
 ARG ARGOCD_VERSION=2.13.3
-RUN curl -Lo /tmp/argocd-${ARGOCD_VERSION} https://github.com/argoproj/argo-cd/releases/download/v${ARGOCD_VERSION}/argocd-linux-amd64 \
-    && chmod +x /tmp/argocd-${ARGOCD_VERSION} \
-    && mv /tmp/argocd-${ARGOCD_VERSION} /usr/local/bin/argocd \
-    && rm /tmp/argocd-${ARGOCD_VERSION}
+RUN curl -LO "https://github.com/argoproj/argo-cd/releases/download/v${ARGOCD_VERSION}/argocd-linux-amd64" \
+    && chmod +x argocd-linux-amd64 \
+    && mv argocd-linux-amd64 /usr/local/bin/argocd
+
 ###############################################################################
 #                           Stage 2: Runner
 ###############################################################################
