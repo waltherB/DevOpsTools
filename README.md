@@ -27,6 +27,8 @@
 * [kubelogin](https://github.com/Azure/kubelogin)
 * [lazydocker](https://github.com/jesseduffield/lazydocker)
 * [usql](https://github.com/xo/usql)
+* [argocd cli](https://github.com/argoproj/argo-cd/)
+* [oc cli](https://github.com/openshift/oc)
 
 ## Additional Packages
 

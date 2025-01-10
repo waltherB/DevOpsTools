@@ -160,6 +160,21 @@ RUN curl -Lo /tmp/k9s.tar.gz https://github.com/derailed/k9s/releases/download/v
     && chmod +x /usr/local/bin/k9s \
     && rm /tmp/k9s.tar.gz
 
+# 4o) oc cli
+ARG OCP_VERSION=4.17.10
+RUN curl -LO "https://mirror.openshift.com/pub/openshift-v4/x86_64/clients/ocp/${OCP_VERSION}/openshift-client-linux-${OCP_VERSION}.tar.gz" \
+    && tar -zxvf openshift-client-linux-${OCP_VERSION}.tar.gz oc \
+    && chmod +x oc \
+    && mv oc /usr/local/bin/oc \
+    && oc completion bash > ${COMPLETIONS}/oc \
+    && rm openshift-client-linux-${OCP_VERSION}.tar.gz 
+
+# 4p) argocd cli
+ARG ARGOCD_VERSION=2.13.3
+RUN curl -Lo /tmp/argocd-${ARGOCD_VERSION} https://github.com/argoproj/argo-cd/releases/download/v${ARGOCD_VERSION}/argocd-linux-amd64 \
+    && chmod +x /tmp/argocd-${ARGOCD_VERSION} \
+    && mv /tmp/argocd-${ARGOCD_VERSION} /usr/local/bin/argocd \
+    && rm /tmp/argocd-${ARGOCD_VERSION}
 ###############################################################################
 #                           Stage 2: Runner
 ###############################################################################
@@ -262,9 +277,11 @@ COPY --from=builder /usr/share/bash-completion/completions /usr/share/bash-compl
 COPY .bashrc $HOME/.bashrc
 COPY .bash_completion $HOME/.bash_completion
 COPY .nanorc $HOME/.nanorc
+COPY .vim/ $HOME/.vim
+COPY .vimrc $HOME/.vimrc
 COPY config.yml $HOME/config.yml
 COPY create_cluster.sh $HOME/create_cluster.sh
-
+COPY ceph-toolbox.sh $HOME/ceph-toolbox.sh
 # Put the kube config in the user’s home
 RUN mkdir -p $HOME/.kube
 COPY config $HOME/.kube/config
